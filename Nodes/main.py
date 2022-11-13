@@ -1,5 +1,5 @@
 class Node:
-    def __init__(self, dataval: object = None, nextval: object = None) -> object:
+    def __init__(self, dataval=None, nextval=None):
         self.dataval = dataval
         self.nextval = nextval
 
@@ -28,11 +28,10 @@ class LinkedList:
         if not self.head:
             self.head = Node(dataval=dataval)
             return
-        curr = self.head
 
+        curr = self.head
         while curr.nextval:
             curr = curr.nextval
-
         curr.nextval = Node(dataval=dataval)
 
     def add_after(self, middle_dataval, dataval):
@@ -130,4 +129,3 @@ numbers.prepend('one')
 print(numbers)
 print(numbers.count_nodes())
 numbers.add_after()
-
