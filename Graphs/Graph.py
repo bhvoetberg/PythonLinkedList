@@ -37,8 +37,8 @@ class Graph(abc.ABC):
         pass
 
 
-class Vertex:
-    def __int__(self):
+class Vertex():
+    def __int__(self, id):
         self.id = id
         self.adjacency_set = set()
 
@@ -58,14 +58,15 @@ class Vertex:
     def is_adjacent(self, v):
         return v in self.adjacency_set
 
+
 class AdjacencySetGraph(Graph):
-    def __init__(self, num_vertices, directed = False):
+    def __init__(self, num_vertices, directed=False):
         super(AdjacencySetGraph, self).__init__(num_vertices, directed)
 
         self.vertex_list = []
-            for i in range(num_vertices):
-                v = Vertex(i)
-                self.vertex_list.append(v)
+        for i in range(num_vertices):
+            v = Vertex(i)
+            self.vertex_list.append(v)
 
     def add_edge(self, v1, v2, weight):
         if v1 >= self.num_vertices or v2 >= self.num_vertices or v1 < 0 or v2 < 0:
@@ -75,7 +76,7 @@ class AdjacencySetGraph(Graph):
 
         self.vertex_list[v1].add_edge(v2)
 
-        if self.directed == False:
+        if not self.directed:
             self.vertex_list[v2].add_edge(v1)
 
     def remove_edge(self, v1, v2, weight):
@@ -84,7 +85,7 @@ class AdjacencySetGraph(Graph):
 
         self.vertex_list[v1].remove_edge(v2)
 
-        if self.directed == False:
+        if not self.directed:
             self.vertex_list[v2].remove_edge(v1)
 
     def get_adjecent_vertices(self, v):
@@ -97,7 +98,7 @@ class AdjacencySetGraph(Graph):
         if v1 >= self.num_vertices or v2 >= self.num_vertices or v1 < 0 or v2 < 0:
             raise ValueError("Vertices %d and %d are out of bounds" % (v1, v2))
 
-        return self.vertex_list[v1].is_adjacent((v2)) or self.vertex_list[v2].is_adjacent(v1)
+        return self.vertex_list[v1].is_adjacent(v2) or self.vertex_list[v2].is_adjacent(v1)
 
     def get_indegree_edge(self, v):
         if v < 0 or v >= self.num_vertices:
@@ -130,8 +131,7 @@ class AdjacencySetGraph(Graph):
 
 
 g = AdjacencySetGraph(4)
-g.add_edge(0, 1)
-g.add_edge(0, 3)
-g.add_edge(1, 3)
-g.add_edge(3, 2)
-
+g.add_edge(0, 1, 1)
+g.add_edge(0, 3, 1)
+g.add_edge(1, 3, 1)
+g.add_edge(3, 2, 1)
