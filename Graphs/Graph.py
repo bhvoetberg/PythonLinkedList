@@ -63,14 +63,12 @@ class Vertex:
 
 
 class AdjacencySetGraph(Graph):
-
     def __init__(self, num_vertices, directed=False):
         super(AdjacencySetGraph, self).__init__(num_vertices, directed)
 
         self.vertex_list = []
         for i in range(num_vertices):
             v = Vertex(i)
-
             self.vertex_list.append(v)
 
     def add_edge(self, v1, v2, weight=1):
@@ -127,13 +125,14 @@ class AdjacencySetGraph(Graph):
             for v in self.get_adjacent_vertices(i):
                 print(i, "-->", v)
 
+
 # ------------------------------------------------------
 
 g = AdjacencySetGraph(4)
-g.add_edge(0, 1, 1)
-g.add_edge(0, 3, 1)
-g.add_edge(1, 3, 1)
-g.add_edge(3, 2, 1)
+g.add_edge(0, 1)
+g.add_edge(0, 3)
+g.add_edge(1, 3)
+g.add_edge(3, 2)
 
 g.show()
 
@@ -141,7 +140,7 @@ for i in range(4):
     print("Adjacent to: ", i, g.get_adjacent_vertices(i))
 
 for i in range(4):
-     print("Indegree for vertex %d is %d" % (i, g.get_indegree(i)))
+    print("Indegree for vertex %d is %d" % (i, g.get_indegree(i)))
 
 g.remove_edge(2, 3)
 g.show()
