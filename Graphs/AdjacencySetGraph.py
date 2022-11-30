@@ -2,13 +2,13 @@ import Graph
 import Vertex
 
 
-class AdjacencySetGraph(Graph):
+class AdjacencySetGraph(Graph.Graph):
     def __init__(self, num_vertices, directed=False):
         super(AdjacencySetGraph, self).__init__(num_vertices, directed)
 
         self.vertex_list = []
         for i in range(num_vertices):
-            v = Vertex(i)
+            v = Vertex.Vertex(i)
             self.vertex_list.append(v)
 
     def add_edge(self, v1, v2, weight=1):

@@ -1,5 +1,7 @@
 from queue import Queue
-from Graph import *
+
+from Graphs.AdjacencyMatrixGraph import AdjacencyMatrixGraph
+
 
 # directed acyclic graph
 def topological_sort(graph):
@@ -20,12 +22,28 @@ def topological_sort(graph):
             sorted_list.append(vertex)
 
             for v in graph.get_adjacent_vertices(vertex):
-                indegree_map[v] = indegree_map[v] -1
+                indegree_map[v] = indegree_map[v] - 1
 
-                if indegree_map[v] == 0
+                if indegree_map[v] == 0:
                     queue.put(v)
 
-            # Hier verbleven
-            # if len(sorted_list) != graph.num_vertices
+        if len(sorted_list) != graph.num_vertices:
+            raise ValueError("This graph has a cycle!")
+
+        print(sorted_list)
 
 
+g = AdjacencyMatrixGraph(9, directed=True)
+
+g.add_edge(0, 1)
+g.add_edge(0, 2)
+g.add_edge(2, 5)
+g.add_edge(2, 4)
+g.add_edge(2, 3)
+g.add_edge(1, 5)
+g.add_edge(5, 6)
+g.add_edge(7, 3)
+g.add_edge(3, 4)
+g.add_edge(7, 8)
+
+topological_sort(g)
